@@ -1,31 +1,39 @@
 const express = require("express")
 const ejsLayouts = require("express-ejs-layouts")
+const fs = require("fs")
+const weatherJs = require("weather-js")
 
 const app = express()
 
 app.set('view engine', 'ejs')
 app.use(ejsLayouts)
-const weatherJs = require("weather-js")
-
+app.use(express.static(__dirname + '/assets')) // trying to add stylesheets
 app.get('/', function(req, res) {
-    res.render('index')
+    res.render('index', {})
 })
 
+let weatherData = []
 // get request for form
-app.get('/weather', function(req, res) {
-    //get zipcode from form
-    let zipCode = req.query.zip
-    //put zipcode into url
-    res.redirect('weather/' + zipCode)
+app.get('/zipcode', function(req, res) {
+    console.log(req.query.zip)
+    weatherJs.find({ search: req.query.zip, degreeType: 'F' }, function (err, result) {
+        if (err) console.log(err);
+        weatherData = result;
+        res.redirect('weather/')
+    });
 })
 
-app.get('/weather/:zip', function(req, res) {
-    let zipCode = req.params.zip;
-    res.render('weather', {
-        zip: zipCode,
-        weather: weatherJs
-    })
-    
+app.get('/weather', function(req, res) {
+    if (typeof weatherData === "undefined") {
+        res.redirect('/')
+    } else {
+        res.render("weather", 
+        { city: weatherData[0].location.name,
+          date: weatherData[0].current.date,
+          currentTemp: weatherData[0].current.temperature,
+            sky: weatherData[0].forecast[1].skytextday
+        })
+    }
 })
 
 app.listen(3000)

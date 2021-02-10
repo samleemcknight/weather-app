@@ -9,13 +9,6 @@
 </head>
 <body>
     <%- include('../partials/header.ejs') %>
-    <% let weatherData = weather.find({ search: zip, degreeType: 'F' }, function (err, result) {%>  
-    <%    if (err) console.log(err); %>
-    <%    city = result[0].location.name; %>
-    <%    date = result[0].current.date %> 
-    <%    currentTemp = result[0].current.temperature %> 
-    <%    sky = result[0].forecast[1].skytextday %> 
-    <% }) %>
     <p>Today's date:</p>
     <%= date %> 
     <p>Location:</p>
