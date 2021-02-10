@@ -9,13 +9,15 @@
 </head>
 <body>
     <%- include('../partials/header.ejs') %>
-    <p>Today's date:</p>
-    <%= date %> 
-    <p>Location:</p>
-    <%= city %> 
-    <p>Current Temperature:</p>
-    <%= currentTemp %> 
-    <p>Today's forecast</p>
-    <%= sky %> 
+    <div class="weather">
+        <p>Today's date:</p>
+        <%= date %> 
+        <p>Location:</p>
+        <%= city %> 
+        <p>Current Temperature:</p>
+        <%= currentTemp %> 
+        <p>Today's forecast</p>
+        <%= sky %> 
+    </div>
 </body>
 </html>

@@ -15,7 +15,6 @@ app.get('/', function(req, res) {
 let weatherData = []
 // get request for form
 app.get('/zipcode', function(req, res) {
-    console.log(req.query.zip)
     weatherJs.find({ search: req.query.zip, degreeType: 'F' }, function (err, result) {
         if (err) console.log(err);
         weatherData = result;

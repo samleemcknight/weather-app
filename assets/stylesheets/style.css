@@ -3,6 +3,29 @@
     padding: 0;
 }
 
+nav {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
+
 form {
-    
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    align-items: center;
+}
+
+form>input {
+    width: 15vw;
+    margin-top: 10px;
+}
+
+.weather {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
